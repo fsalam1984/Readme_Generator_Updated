@@ -4,7 +4,8 @@ const colors = require('colors');
 const fs = require('fs');
 
 // TODO: Create an array of questions for user input
-const questions = ["What is your application repository?", "Enter your Project Title:", "Enter a Description, Istallation instructions, usage information, contribution guidelines, test instructions: ", 
+const questions = ["What is your application repository?", "Enter your Project Title:", 
+"Enter a Description: ","Enter Istallation instructions: ", "Enter Usage information: " ,"Enter Contribution guidelines: ", "Test instructions: ", 
 
 "Which license do you want to use?", "What is your GitHub username?", "What is your email address?"];
 
@@ -15,29 +16,31 @@ function writeToFile(fileName, data) {
     console.log(data)
 
     let writer = fs.createWriteStream("README-Testing.md");
-
-    let myTitle = `# Title here\n`
-    let myDesc = `## Description\n`
+    let myBadgeLicense = `![LicenseBadge](https://img.shields.io/badge/License-${data.license}-aqua)\n`
+    let myTitle = `# ${data.title}\n`
+    let myDesc = `## Description\n
+    ${data.description}\n`
     let myTOC = `## Table of Contents\n`
     let myToc2 = `- [Installation](#installation)\n- [Usage](#usage)\n- [Credits](#credits)\n- [License](#license)\n`
     let myInstallsec = `## Installation\n 
-    What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.\n`
+    ${data.installation}\n`
     let myUsagesec = `## Usage\n
-    Provide instructions and examples for use. Include screenshots as needed.\n`
+    ${data.usage}\n`
     let myCreditsec = `## Credits\n
     Proudly created by : Faisal Salam!\n`
-    let myLicensesec = `## License\n
-    The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).\n`
+    let myLicensesec = `## License\n> [!NOTE]\n> Application is covered under license : ${data.license}\n`
     let myBadgessec = `## Badges\n`
     let myBadgeimg = `![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)\n`
     let myFeaturesec = `## Features\n
     If your project has a lot of features, list them here.\n`
     let myContributesec = `## How to Contribute\n
-    If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.\n`
-    let myTestsSec = `## Tests\n`
-    let myQuesSec = `## Questions`
+    ${data.contribution}\n`
+    let myTestsSec = `## Tests\n
+    ${data.tests}\n`
+    let myQuesSec = `## Questions\n
+    https://github.com/${data.GitHubUsername}\n, You can reach me at: ${data.email}.`
     
-    writer.write(myTitle + myDesc + myTOC +myToc2+myInstallsec+myUsagesec+myCreditsec+myLicensesec+myBadgessec+myBadgeimg+myFeaturesec+myContributesec+myTestsSec+myQuesSec+`\n`);
+    writer.write(myBadgeLicense+ myTitle + myDesc + myTOC +myToc2+myInstallsec+myUsagesec+myCreditsec+myLicensesec+myBadgessec+myBadgeimg+myFeaturesec+myContributesec+myTestsSec+myQuesSec+`\n`);
  
 
 
@@ -73,33 +76,56 @@ function init() {
                 name: 'title',
                 message: colors.bgBlue(questions[i+1]),
               },
+
+              //Enter a description, installation instructions, usage information, contribution guidelines, and test instructions
               {
-                type: 'checkbox',
-                message: colors.bgBlue(questions[i+2]),
+                type: 'input',
                 name: 'description',
-                choices: ['HTML', 'CSS', 'JavaScript', 'PostgreSQL'],
-              },
-              {
-                type: 'list',
-                message: colors.bgBlue(questions[i+3]),
-                name: 'license',
-                choices: ['1.0', '2.0', '3.0'],
+                message: colors.bgBlue(questions[i+2]),
               },
               {
                 type: 'input',
-                name: 'GitHubUsername',
+                name: 'installation',
+                message: colors.bgBlue(questions[i+3]),
+              },
+              {
+                type: 'input',
+                name: 'usage',
                 message: colors.bgBlue(questions[i+4]),
               },
               {
                 type: 'input',
-                name: 'email',
+                name: 'contribution',
                 message: colors.bgBlue(questions[i+5]),
+              },
+              {
+                type: 'input',
+                name: 'tests',
+                message: colors.bgBlue(questions[i+6]),
+              },
+              /////
+              {
+                type: 'checkbox',
+                message: colors.bgBlue(questions[i+7]),
+                name: 'license',
+                choices: ['1.0', '2.0', '3.0', '4.0'],
+              },
+            
+              {
+                type: 'input',
+                name: 'GitHubUsername',
+                message: colors.bgBlue(questions[i+8]),
+              },
+              {
+                type: 'input',
+                name: 'email',
+                message: colors.bgBlue(questions[i+9]),
               },
     ])
     .then((data) => {
         const filename = `README-Test.md`;
 
-        data=i;
+        
         writeToFile(filename,data)
 
     })

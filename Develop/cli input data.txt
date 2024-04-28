@@ -1,0 +1,12 @@
+{
+  repository: 'Readme_Generator_updated',
+  title: 'Readme Faisal',
+  description: 'This is a auto generated Readme.md file created using Node.js',
+  installation: 'To install you have to run the following command in the terminal : node index.js',
+  usage: 'The usage for this for any Visual Studio project that requires Github and a Readme.md file.',
+  contribution: 'The contribution guidelines should include 1. Steps for creating good issues or pull requests 2. Links to external documentation 3. mailing lists 4. Community and behavioral expectations.',
+  tests: 'Run the node index.js command and enter the answers to the questions in the CLI. After the script executes find the README-Testing.md file and verify the results in Preview mode of the README-Testing.md file.',
+  license: [ 'HTML' ],
+  GitHubUsername: 'fsalam84',
+  email: 'fsenterprise1@gmail.com'
+}
